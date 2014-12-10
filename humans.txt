@@ -3,16 +3,18 @@
 
 # TEAM
 
-    Martin de Navacelle -- Developer / Integrator -- @dahugobez
+    Martin de Navacelle -- Developer -- @dahugobez
 
 # THANKS
 
     Capgemini
     BNP Paribas
-    Open source contributors of each technology used 
+    Open source authors whose work was used in this project
 
 # TECHNOLOGY COLOPHON
 
     HTML5, CSS3
-    Normalize.css, jQuery, Modernizr
-    Less, Hyx.less
+    jQuery, Modernizr
+    HTML5Boilerplate.com
+    LessCss.org
+    CoffeeScript.org
