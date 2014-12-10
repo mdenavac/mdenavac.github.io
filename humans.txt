@@ -1,0 +1,18 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Martin de Navacelle -- Developer / Integrator -- @dahugobez
+
+# THANKS
+
+    Capgemini
+    BNP Paribas
+    Open source contributors of each technology used 
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, CSS3
+    Normalize.css, jQuery, Modernizr
+    Less, Hyx.less
