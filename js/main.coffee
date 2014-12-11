@@ -1,103 +1,78 @@
-MBP.scaleFix()
 MBP.hideUrlBarOnLoad()
+MBP.scaleFix()
 MBP.preventScrolling()
 MBP.preventZoom()
 
 book = 
+	storiesList: null
+	displayStory: (storyName)->
+		console.log "displayStory #{storyName}"
+		$('.story, .story-app, .story-app-mag').addClass('invisible')
+		for i in Object.getOwnPropertyNames book.stories[storyName].show
+			$( '#' + book.stories[storyName].show[i]).removeClass('invisible')
+		if book.stories[storyName].set
+			book.stories[storyName].set()
+
 	stories: 
-		splash: ()->
-			nom = 'splash'
-			console.log( 'storyStart ' + nom )
-			$('.story').addClass('invisible')
-			$('#' + nom).removeClass('invisible')
-		login: ()->
-			nom = 'login'
-			console.log( 'storyStart ' + nom )
-			$('.story').addClass('invisible')
-			$('#' + nom).removeClass('invisible')
-		sliding_menu: ()->
-			nom = 'sliding_menu'
-			console.log( 'storyStart ' + nom )
-			$('.story').addClass('invisible')
-			$('#' + nom).removeClass('invisible')
-		app: ()-> 
-			nom = 'app'
-			console.log( 'storyStart ' + nom )
-			$('.story').addClass('invisible')
-			$('#' + nom).removeClass('invisible')
-		mag: ()-> #never directly called
-			this.app()
-			nom = 'mag'
-			console.log( 'storyStart ' + nom )
-			$('.story-app').addClass('invisible')
-			$('#' + nom).removeClass('invisible')
-		a_la_une: ()->
-			this.mag()
-			nom = 'a_la_une'
-			console.log( 'storyStart ' + nom )
-			$('.story-app-mag').addClass('invisible')
-			$('#' + nom).removeClass('invisible')
-		actualites: ()->
-			this.mag()
-			nom = 'actualites'
-			console.log( 'storyStart ' + nom )
-			$('.story-app-mag').addClass('invisible')
-			$('#' + nom).removeClass('invisible')
-		focus: ()->
-			this.mag()
-			nom = 'focus'
-			console.log( 'storyStart ' + nom )
-			$('.story-app-mag').addClass('invisible')
-			$('#' + nom).removeClass('invisible')
-		mes_articles: ()->
-			this.mag()
-			nom = 'mes_articles'
-			console.log( 'storyStart ' + nom )
-			$('.story-app-mag').addClass('invisible')
-			$('#' + nom).removeClass('invisible')
-		texte_cgv: ()->
-			this.app()
-			nom = 'texte_cgv'
-			console.log( 'storyStart ' + nom )
-			$('.story-app').addClass('invisible')
-			$('#' + nom).removeClass('invisible')
-		texte_confi: ()->
-			this.app()
-			nom = 'texte_confi'
-			console.log( 'storyStart ' + nom )
-			$('.story-app').addClass('invisible')
-			$('#' + nom).removeClass('invisible')
-		res_recherche: ()->
-			this.app()
-			nom = 'res_recherche'
-			console.log( 'storyStart ' + nom )
-			$('.story-app').addClass('invisible')
-			$('#' + nom).removeClass('invisible')
-		ajouter_tuile: ()->
-			this.app()
-			nom = 'ajouter_tuile'
-			console.log( 'storyStart ' + nom )
-			$('.story-app').addClass('invisible')
-			$('#' + nom).removeClass('invisible')
-		mon_compte: ()->
-			this.app()
-			nom = 'mon_compte'
-			console.log( 'storyStart ' + nom )
-			$('.story-app').addClass('invisible')
-			$('#' + nom).removeClass('invisible')
-		article_ouvert: ()->
-			this.app()
-			nom = 'article_ouvert'
-			console.log( 'storyStart ' + nom )
-			$('.story-app').addClass('invisible')
-			$('#' + nom).removeClass('invisible')
+		splash:
+			show: ['splash']
+		login:
+			show: ['login']
+		a_la_une:
+			show: ['app', 'mag', 'a_la_une']
+		actualites:
+			show: ['app', 'mag', 'actualites']
+		focus:
+			show: ['app', 'mag', 'focus']
+		mes_articles:
+			show: ['app', 'mag', 'mes_articles']
+		sliding_menu:
+			show: []
+			set:()->
+				$('#sliding_menu').toggleClass('invisible')
+		texte_cgv:
+			show: ['app','texte_cgv']
+		texte_confi:
+			show: ['app','texte_confi']
+		res_recherche:
+			show: ['app','res_recherche']
+		article_ouvert:
+			show: ['app','article_ouvert']
+		ajouter_tuile:
+			show: ['app','ajouter_tuile']
+		mon_compte:
+			show: ['app','mon_compte']
 
-	storyStart: (div)->
-		this.stories[div]()
+	storyTell: (div)->
+		book.displayStory(div)
 
-	storyTell: (element)->
-		this.storyStart 'splash' #$(element).context.id
+	storyAsk: (element)->
+		book.storyTell 'splash' #$(element).context.id
+
+	navigate:
+		cursor: 0
+		size: 0
+		next: ->
+			if @cursor + 1 >= @size
+				@cursor = 0
+			else
+				@cursor += 1
+			book.displayStory book.storiesList[@cursor]
+		prev: ->
+			if @cursor - 1 <= 0
+				@cursor = @size - 1
+			else
+				@cursor -= 1
+			book.displayStory book.storiesList[@cursor]
 
 window.book = book
 
-window.book.storyTell()
+$(document).ready ->
+	book.storiesList = `Object.getOwnPropertyNames(window.book.stories)`
+	book.navigate.size = book.storiesList.length
+	
+	$(window.document).keypress (e)->
+  		window.book.navigate.next() if e.charCode is 102
+  		window.book.navigate.prev() if e.charCode is 101
+
+	window.book.storyAsk()

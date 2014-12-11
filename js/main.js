@@ -2,143 +2,115 @@
 (function() {
   var book;
 
-  MBP.scaleFix();
-
   MBP.hideUrlBarOnLoad();
+
+  MBP.scaleFix();
 
   MBP.preventScrolling();
 
   MBP.preventZoom();
 
   book = {
-    stories: {
-      splash: function() {
-        var nom;
-        nom = 'splash';
-        console.log('storyStart ' + nom);
-        $('.story').addClass('invisible');
-        return $('#' + nom).removeClass('invisible');
-      },
-      login: function() {
-        var nom;
-        nom = 'login';
-        console.log('storyStart ' + nom);
-        $('.story').addClass('invisible');
-        return $('#' + nom).removeClass('invisible');
-      },
-      sliding_menu: function() {
-        var nom;
-        nom = 'sliding_menu';
-        console.log('storyStart ' + nom);
-        $('.story').addClass('invisible');
-        return $('#' + nom).removeClass('invisible');
-      },
-      app: function() {
-        var nom;
-        nom = 'app';
-        console.log('storyStart ' + nom);
-        $('.story').addClass('invisible');
-        return $('#' + nom).removeClass('invisible');
-      },
-      mag: function() {
-        var nom;
-        this.app();
-        nom = 'mag';
-        console.log('storyStart ' + nom);
-        $('.story-app').addClass('invisible');
-        return $('#' + nom).removeClass('invisible');
-      },
-      a_la_une: function() {
-        var nom;
-        this.mag();
-        nom = 'a_la_une';
-        console.log('storyStart ' + nom);
-        $('.story-app-mag').addClass('invisible');
-        return $('#' + nom).removeClass('invisible');
-      },
-      actualites: function() {
-        var nom;
-        this.mag();
-        nom = 'actualites';
-        console.log('storyStart ' + nom);
-        $('.story-app-mag').addClass('invisible');
-        return $('#' + nom).removeClass('invisible');
-      },
-      focus: function() {
-        var nom;
-        this.mag();
-        nom = 'focus';
-        console.log('storyStart ' + nom);
-        $('.story-app-mag').addClass('invisible');
-        return $('#' + nom).removeClass('invisible');
-      },
-      mes_articles: function() {
-        var nom;
-        this.mag();
-        nom = 'mes_articles';
-        console.log('storyStart ' + nom);
-        $('.story-app-mag').addClass('invisible');
-        return $('#' + nom).removeClass('invisible');
-      },
-      texte_cgv: function() {
-        var nom;
-        this.app();
-        nom = 'texte_cgv';
-        console.log('storyStart ' + nom);
-        $('.story-app').addClass('invisible');
-        return $('#' + nom).removeClass('invisible');
-      },
-      texte_confi: function() {
-        var nom;
-        this.app();
-        nom = 'texte_confi';
-        console.log('storyStart ' + nom);
-        $('.story-app').addClass('invisible');
-        return $('#' + nom).removeClass('invisible');
-      },
-      res_recherche: function() {
-        var nom;
-        this.app();
-        nom = 'res_recherche';
-        console.log('storyStart ' + nom);
-        $('.story-app').addClass('invisible');
-        return $('#' + nom).removeClass('invisible');
-      },
-      ajouter_tuile: function() {
-        var nom;
-        this.app();
-        nom = 'ajouter_tuile';
-        console.log('storyStart ' + nom);
-        $('.story-app').addClass('invisible');
-        return $('#' + nom).removeClass('invisible');
-      },
-      mon_compte: function() {
-        var nom;
-        this.app();
-        nom = 'mon_compte';
-        console.log('storyStart ' + nom);
-        $('.story-app').addClass('invisible');
-        return $('#' + nom).removeClass('invisible');
-      },
-      article_ouvert: function() {
-        var nom;
-        this.app();
-        nom = 'article_ouvert';
-        console.log('storyStart ' + nom);
-        $('.story-app').addClass('invisible');
-        return $('#' + nom).removeClass('invisible');
+    storiesList: null,
+    displayStory: function(storyName) {
+      var i, _i, _len, _ref;
+      console.log("displayStory " + storyName);
+      $('.story, .story-app, .story-app-mag').addClass('invisible');
+      _ref = Object.getOwnPropertyNames(book.stories[storyName].show);
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        i = _ref[_i];
+        $('#' + book.stories[storyName].show[i]).removeClass('invisible');
+      }
+      if (book.stories[storyName].set) {
+        return book.stories[storyName].set();
       }
     },
-    storyStart: function(div) {
-      return this.stories[div]();
+    stories: {
+      splash: {
+        show: ['splash']
+      },
+      login: {
+        show: ['login']
+      },
+      a_la_une: {
+        show: ['app', 'mag', 'a_la_une']
+      },
+      actualites: {
+        show: ['app', 'mag', 'actualites']
+      },
+      focus: {
+        show: ['app', 'mag', 'focus']
+      },
+      mes_articles: {
+        show: ['app', 'mag', 'mes_articles']
+      },
+      sliding_menu: {
+        show: [],
+        set: function() {
+          return $('#sliding_menu').toggleClass('invisible');
+        }
+      },
+      texte_cgv: {
+        show: ['app', 'texte_cgv']
+      },
+      texte_confi: {
+        show: ['app', 'texte_confi']
+      },
+      res_recherche: {
+        show: ['app', 'res_recherche']
+      },
+      article_ouvert: {
+        show: ['app', 'article_ouvert']
+      },
+      ajouter_tuile: {
+        show: ['app', 'ajouter_tuile']
+      },
+      mon_compte: {
+        show: ['app', 'mon_compte']
+      }
     },
-    storyTell: function(element) {
-      return this.storyStart('splash');
+    storyTell: function(div) {
+      return book.displayStory(div);
+    },
+    storyAsk: function(element) {
+      return book.storyTell('splash');
+    },
+    navigate: {
+      cursor: 0,
+      size: 0,
+      next: function() {
+        if (this.cursor + 1 >= this.size) {
+          this.cursor = 0;
+        } else {
+          this.cursor += 1;
+        }
+        return book.displayStory(book.storiesList[this.cursor]);
+      },
+      prev: function() {
+        if (this.cursor - 1 <= 0) {
+          this.cursor = this.size - 1;
+        } else {
+          this.cursor -= 1;
+        }
+        return book.displayStory(book.storiesList[this.cursor]);
+      }
     }
   };
 
   window.book = book;
 
-  window.book.storyTell();
+  $(document).ready(function() {
+    book.storiesList = Object.getOwnPropertyNames(window.book.stories);
+    book.navigate.size = book.storiesList.length;
+    $(window.document).keypress(function(e) {
+      if (e.charCode === 102) {
+        window.book.navigate.next();
+      }
+      if (e.charCode === 101) {
+        return window.book.navigate.prev();
+      }
+    });
+    return window.book.storyAsk();
+  });
 
 }).call(this);
