@@ -4,16 +4,6 @@ body {
 	background-color: @test-color;
 }
 
-html, body, #vue, .story, .story-app, .story-app-mag {
-	height: 100%;
-	width: 100%;
-	position: fixed;
-}
-
-.story.container {
-	height: auto;
-}
-
 @import 'hyx';
 @gutter: 4%; // global gutter, required
 
@@ -36,24 +26,37 @@ html, body, #vue, .story, .story-app, .story-app-mag {
 .white { background-color: #FFFFFF !important; }
 .yellow { background-color: #ffeb3b !important; }
 
+@gray200: #EEEEEE;
+
 
 /* Squelette */
+
+html, body, #vue, .story, .story-app, .story-app-mag {
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	top: 0px;
+}
+
 
 #vue {
 	overflow: hidden;
 }
 
 #splash {
-	background-color: orange;
+	background-color: @gray200;
 }
 
 #login { .amber }
 #sliding_menu { .black }
 #app { .blue }
-#bandeau { .brown }
+#bandeau { .green }
 #mag { .cyan }
-#sections { .green }
-#a_la_une { .grey }
+#sections { .white }
+#a_la_une { 
+	.grey;
+	z-index: 1;
+}
 #actualites { .indigo }
 #focus { .lime }
 #mes_articles { .orange }
@@ -61,14 +64,28 @@ html, body, #vue, .story, .story-app, .story-app-mag {
 #texte_confi { .purple }
 #res_recherche { .red }
 #ajouter_tuile { .teal }
-#mon_compte { .white }
+#mon_compte { .brown }
 #article_ouvert { .yellow }
 
+#bandeau, #sections {
+	position: relative;
+	z-index: 10;
+}
+
 #bandeau {
-	height: 100px;
+	height: 64px;
 }
 
 #sections {
-	height: 70px;
+	margin-top: 64px;
+	height: 42px;
 }
 
+
+/* Ecrans */
+#vue img {
+	height: 100%;
+	width: auto;
+	position: fixed;
+	top: 0px;
+}

@@ -20,12 +20,12 @@ book =
 			console.log( 'storyStart ' + nom )
 			$('.story').addClass('invisible')
 			$('#' + nom).removeClass('invisible')
-		app: ()->
+		app: ()-> 
 			nom = 'app'
 			console.log( 'storyStart ' + nom )
 			$('.story').addClass('invisible')
 			$('#' + nom).removeClass('invisible')
-		mag: ()->
+		mag: ()-> #never directly called
 			this.app()
 			nom = 'mag'
 			console.log( 'storyStart ' + nom )
