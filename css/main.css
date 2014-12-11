@@ -1,6 +1,19 @@
 body {
   background-color: #428bca;
 }
+html,
+body,
+#vue,
+.story,
+.story-app,
+.story-app-mag {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+}
+.story.container {
+  height: auto;
+}
 /*! Hyx.less v2.1.0 | MIT License | http://github.com/thinkxl/hyx.less */
 .row {
   width: 100%;
@@ -12,4 +25,114 @@ body {
 }
 .row:after {
   clear: both;
+}
+/* Colors */
+.amber {
+  background-color: #ffc107 !important;
+}
+.black {
+  background-color: #000000 !important;
+}
+.blue {
+  background-color: #2196F3 !important;
+}
+.brown {
+  background-color: #795548 !important;
+}
+.cyan {
+  background-color: #00bcd4 !important;
+}
+.green {
+  background-color: #4CAF50 !important;
+}
+.grey {
+  background-color: #9e9e9e !important;
+}
+.indigo {
+  background-color: #3f51b5 !important;
+}
+.lime {
+  background-color: #cddc39 !important;
+}
+.orange {
+  background-color: #ff9800 !important;
+}
+.pink {
+  background-color: #e91e63 !important;
+}
+.purple {
+  background-color: #9c27b0 !important;
+}
+.red {
+  background-color: #F44336 !important;
+}
+.teal {
+  background-color: #009688 !important;
+}
+.white {
+  background-color: #FFFFFF !important;
+}
+.yellow {
+  background-color: #ffeb3b !important;
+}
+/* Squelette */
+#vue {
+  overflow: hidden;
+}
+#splash {
+  background-color: orange;
+}
+#login {
+  background-color: #ffc107 !important;
+}
+#sliding_menu {
+  background-color: #000000 !important;
+}
+#app {
+  background-color: #2196F3 !important;
+}
+#bandeau {
+  background-color: #795548 !important;
+}
+#mag {
+  background-color: #00bcd4 !important;
+}
+#sections {
+  background-color: #4CAF50 !important;
+}
+#a_la_une {
+  background-color: #9e9e9e !important;
+}
+#actualites {
+  background-color: #3f51b5 !important;
+}
+#focus {
+  background-color: #cddc39 !important;
+}
+#mes_articles {
+  background-color: #ff9800 !important;
+}
+#texte_cgv {
+  background-color: #e91e63 !important;
+}
+#texte_confi {
+  background-color: #9c27b0 !important;
+}
+#res_recherche {
+  background-color: #F44336 !important;
+}
+#ajouter_tuile {
+  background-color: #009688 !important;
+}
+#mon_compte {
+  background-color: #FFFFFF !important;
+}
+#article_ouvert {
+  background-color: #ffeb3b !important;
+}
+#bandeau {
+  height: 100px;
+}
+#sections {
+  height: 70px;
 }

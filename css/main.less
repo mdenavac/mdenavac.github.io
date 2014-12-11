@@ -4,5 +4,71 @@ body {
 	background-color: @test-color;
 }
 
+html, body, #vue, .story, .story-app, .story-app-mag {
+	height: 100%;
+	width: 100%;
+	position: fixed;
+}
+
+.story.container {
+	height: auto;
+}
+
 @import 'hyx';
 @gutter: 4%; // global gutter, required
+
+
+/* Colors */
+.amber { background-color: #ffc107 !important; }
+.black { background-color: #000000 !important; }
+.blue { background-color: #2196F3 !important; }
+.brown { background-color: #795548 !important; }
+.cyan { background-color: #00bcd4 !important; }
+.green { background-color: #4CAF50 !important; }
+.grey { background-color: #9e9e9e !important; }
+.indigo { background-color: #3f51b5 !important; }
+.lime { background-color: #cddc39 !important; }
+.orange { background-color: #ff9800 !important; }
+.pink { background-color: #e91e63 !important; }
+.purple { background-color: #9c27b0 !important; }
+.red { background-color: #F44336 !important; }
+.teal { background-color: #009688 !important; }
+.white { background-color: #FFFFFF !important; }
+.yellow { background-color: #ffeb3b !important; }
+
+
+/* Squelette */
+
+#vue {
+	overflow: hidden;
+}
+
+#splash {
+	background-color: orange;
+}
+
+#login { .amber }
+#sliding_menu { .black }
+#app { .blue }
+#bandeau { .brown }
+#mag { .cyan }
+#sections { .green }
+#a_la_une { .grey }
+#actualites { .indigo }
+#focus { .lime }
+#mes_articles { .orange }
+#texte_cgv { .pink }
+#texte_confi { .purple }
+#res_recherche { .red }
+#ajouter_tuile { .teal }
+#mon_compte { .white }
+#article_ouvert { .yellow }
+
+#bandeau {
+	height: 100px;
+}
+
+#sections {
+	height: 70px;
+}
+
