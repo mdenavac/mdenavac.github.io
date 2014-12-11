@@ -70,6 +70,8 @@ window.book = book
 $(document).ready ->
 	book.storiesList = `Object.getOwnPropertyNames(window.book.stories)`
 	book.navigate.size = book.storiesList.length
+	window.mySwipe = $('#slider')
+
 	
 	$(window.document).keypress (e)->
   		window.book.navigate.next() if e.charCode is 102

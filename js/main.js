@@ -102,6 +102,7 @@
   $(document).ready(function() {
     book.storiesList = Object.getOwnPropertyNames(window.book.stories);
     book.navigate.size = book.storiesList.length;
+    window.mySwipe = $('#slider');
     $(window.document).keypress(function(e) {
       if (e.charCode === 102) {
         window.book.navigate.next();
